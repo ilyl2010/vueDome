@@ -12,7 +12,7 @@
             todoname:""
           }
       },
-      props:{add:Function},
+      props:{},
       methods:{
           addTodo(){
             const todoname=this.todoname;
@@ -24,7 +24,8 @@
                 complete:false
               }
             ;
-              add(todo)
+              //add(todo)
+              this.$emit('add',todo)
             }
           }
       }
