@@ -2,7 +2,7 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <ToDoHeader @add="add"/>
+        <ToDoHeader ref="header"/>
         <ToDoList :todos="todos" :del="del" />
         <ToDoFooter :delTrue="delTrue" :todos="todos" :checkALL="checkALL"/>
       </div>
@@ -36,6 +36,9 @@
         checkALL(check){
           this.todos.forEach(todo=>todo.complete=check)
         }
+      },
+      mounted(){
+          this.$refs.header.$on("add",this.add)
       },
       watch:{//监视
           todos:{
