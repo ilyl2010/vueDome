@@ -4,7 +4,12 @@
       <div class="todo-wrap">
         <ToDoHeader ref="header"/>
         <ToDoList :todos="todos"  />
-        <ToDoFooter :delTrue="delTrue" :todos="todos" :checkALL="checkALL"/>
+        <!--<ToDoFooter :delTrue="delTrue" :todos="todos" :checkALL="checkALL"/>-->
+        <ToDoFooter>
+          <input type="checkbox" v-model="isCheck" slot="checkall"/>
+          <span slot="count">已完成{{completeNum}} / 全部{{todos.length}}</span>
+          <button class="btn btn-danger" @click="delTrue" v-show="completeNum>0" slot="delete">清除已完成任务</button>
+        </ToDoFooter>
       </div>
     </div>
   </div>
@@ -22,6 +27,19 @@
           return{
             //从localstorage读取数据
           todos:JSON.parse(window.localStorage.getItem('todos_key')||'[]')
+        }
+      },
+      computed:{
+        completeNum(){
+          return this.todos.reduce((preTotal,todo)=>preTotal+(todo.complete?1:0),0)
+        },
+        isCheck:{
+          get(){
+            return this.completeNum===this.todos.length
+          },
+          set(value){
+            this.checkALL(value)
+          }
         }
       },
       methods:{
