@@ -9,11 +9,12 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js';
+
     export default {
       name: "ToDoItem",
       props:{
           todo:Object,
-        del:Function,
         index:Number
       },
       data(){
@@ -33,7 +34,9 @@
           }
         },
         delTodo(){
-          this.del(this.index);
+          //this.del(this.index);
+          //发布消息
+          PubSub.publish("del",this.index)
         }
       }
     }

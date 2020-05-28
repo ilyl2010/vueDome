@@ -3,7 +3,7 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <ToDoHeader ref="header"/>
-        <ToDoList :todos="todos" :del="del" />
+        <ToDoList :todos="todos"  />
         <ToDoFooter :delTrue="delTrue" :todos="todos" :checkALL="checkALL"/>
       </div>
     </div>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js';
   import ToDoFooter from './components/ToDoFooter';
   import ToDoHeader from './components/ToDoHeader';
   import ToDoList from './components/ToDoList';
@@ -39,6 +40,9 @@
       },
       mounted(){
           this.$refs.header.$on("add",this.add)
+        PubSub.subscribe('del', (msg,data) =>{
+                this.del(data)
+        })
       },
       watch:{//监视
           todos:{
