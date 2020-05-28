@@ -67,10 +67,11 @@
       watch:{//监视
           todos:{
             deep:true,//必须是深度监视
-            handler:function (value) {
-            //把todos最新的值的json数据，保存到localstorage
-              storageUtil.saveTodos(value)
-            }
+            // handler:function (value) {
+            // //把todos最新的值的json数据，保存到localstorage
+            //   storageUtil.saveTodos(value)
+            // }
+            handler:storageUtil.saveTodos
           }
       }
     }
