@@ -20,13 +20,15 @@
   import ToDoFooter from './components/ToDoFooter';
   import ToDoHeader from './components/ToDoHeader';
   import ToDoList from './components/ToDoList';
+  import storageUtil from './util/storageUtil'
+
     export default {
         name: "App",
       components:{ToDoFooter,ToDoHeader,ToDoList},
       data(){
           return{
             //从localstorage读取数据
-          todos:JSON.parse(window.localStorage.getItem('todos_key')||'[]')
+          todos:storageUtil.readTodos()
         }
       },
       computed:{
@@ -67,7 +69,7 @@
             deep:true,//必须是深度监视
             handler:function (value) {
             //把todos最新的值的json数据，保存到localstorage
-              window.localStorage.setItem('todos_key',JSON.stringify(value))
+              storageUtil.saveTodos(value)
             }
           }
       }
