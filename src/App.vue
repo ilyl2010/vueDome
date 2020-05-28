@@ -20,7 +20,7 @@
         },
       mounted(){
           //发ajax请求获取数据
-        const url='https://api.github.com/search/repositories?q=vu&sort=stars'
+        const url='https://api.github.com/search2/repositories?q=vu&sort=stars'
         this.$http.get(url).then(
           response => {//成功回调函数
             console.log(response.data) // 得到返回结果数据
@@ -31,6 +31,7 @@
           },
           response => {//失败回调函数
             console.log(response.data) // 得到返回结果数据
+            alert("失败")
           },
         )
       }
