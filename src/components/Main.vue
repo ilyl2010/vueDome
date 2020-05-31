@@ -6,7 +6,7 @@
   <div class="row" v-for="(user,index) in usrs" :key="index">
     <div class="card">
       <a :href="user.url" target="_blank">
-        <img src="user.avatar_url" style='width: 100px'/>
+        <img :src="user.avatar_url" style='width: 100px'/>
       </a>
       <p class="card-text">{{user.name}}</p>
     </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import  PubSub from 'pubsub-js'
+  import axios from 'axios'
     export default {
         name: "Main",
       data(){
@@ -24,6 +26,26 @@
             errorMsg:"",
             usrs:null   //[{url:'',avatar_url:'',name:''}]
           }
+      },
+      mounted(){
+        PubSub.subscribe("search",(msg,searName)=>{
+          const url=`https://api.github.com/search/users?q=${searName}`;
+          this.firstView=false;
+          this.loading=true;
+          axios.get(url).then(response=>{
+            const result=response.data;
+            const usrss=result.items.map(item=>({
+              url:item.html_url,
+              avatar_url:item.avatar_url,
+              name:item.login
+            }));
+            this.loading=false
+            this.usrs=usrss;
+          }).catch(error=>{
+            this.loading=false
+            this.errorMsg='请求失败'
+          })
+        });
       }
     }
 </script>
