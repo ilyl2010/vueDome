@@ -1,21 +1,18 @@
 <template>
-    <div class="container">
-      <Search/>
-      <users-main/>
-    </div>
+  <mt-button type="primary" @click.native="handleClick" style="width: 100%">Test</mt-button>
 </template>
 
 <script>
-  import Search from './components/Search'
-  import Main from './components/Main'
-    export default {
-      components:{
-        Search,
-        UsersMain:Main
+  import { Toast } from 'mint-ui'
+  export default {
+    methods: {
+      handleClick () {
+        Toast('提示信息')
       }
     }
+  }
 </script>
 
-<style scoped>
+<style>
 
 </style>
