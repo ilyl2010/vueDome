@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>About</h2>
+    <p>{{msg}}</p>
 <input/>
   </div>
 </template>
