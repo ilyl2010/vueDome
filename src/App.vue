@@ -18,7 +18,9 @@
         <div class="panel">
           <div class="panel-body">
             <!--显示当前组件-->
+            <keep-alive>
               <router-view ></router-view>
+            </keep-alive>
           </div>
         </div>
       </div>
