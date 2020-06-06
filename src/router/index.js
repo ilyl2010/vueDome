@@ -8,6 +8,7 @@ import About from '../pages/About.vue'
 import Home from '../pages/Home.vue'
 import News from '../pages/News.vue'
 import Messages from '../pages/Messages.vue'
+import MsgDetail from '../pages/MsgDetail'
 
 // 声明使用vue-router插件
 /*
@@ -36,6 +37,12 @@ export default new VueRouter ({
         {
           path: 'message',
           component: Messages,
+          children:[
+            {
+            path:'/home/message/detail/:id',
+            component:MsgDetail
+            }
+          ]
         },
         {
           path: '',

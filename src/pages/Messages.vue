@@ -1,9 +1,13 @@
 <template>
+  <div>
   <ul>
-    <li v-for="(message, index) in messages" :key="index">
-      {{message.msg}}
+    <li v-for="message in messages" :key="message.id">
+      <router-link :to="`/home/message/detail/${message.id}`">{{message.msg}}</router-link>
     </li>
   </ul>
+    <hr>
+  <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -21,7 +25,7 @@
             const messages=[
               {id:1,msg:'message1'},
               {id:2,msg:'message2'},
-              {id:3,msg:'message3'},
+              {id:4,msg:'message4'},
             ];
             this.messages=messages;
           },1000)
